@@ -12,30 +12,29 @@ public class ServiceUser {
     Scanner scanner = new Scanner(System.in);
     TaskController taskController = new TaskController();
     HistoryController historyController = new HistoryController();
-    UserController userController =new UserController();
     CategorieController categorieController = new CategorieController();
-    public void gestionaDesTaches() throws SQLException {
-        System.out.println("entrer   1 pour aficher les taches avec leur emploi du temp ");
-        System.out.println("entrer   2 pour afficher  les historiques");
-        System.out.println("entrer   3 pour aficher  les tache par priority");
-        System.out.println("entrer   4 pour retone a menu principal ");
-        int n = scanner.nextInt();
-        switch (n) {
 
+    public void gestionaDesTaches() throws SQLException {
+        System.out.println("entrer   1 pour afficher les taches avec leur emploi du temp ");
+        System.out.println("entrer   2 pour afficher  les historiques");
+        System.out.println("entrer   3 pour afficher  les tache par priority");
+        System.out.println("entrer   4 pour retour a menu principal ");
+        int n = scanner.nextInt();
+        switch (n)
+        {
             case 1: {
                 taskController.trieTaskWithDate();
                 System.out.println("enter y pour accéde a la menu precedent");
                 String b = scanner.next();
-                if (b.equals("y")){
+                if (b.equals("y"))
+                {
                     gestionaDesTaches();
                 }
                 else {
                     break;
                 }
-
                 break ;
             }
-
             case 2: {
                 historyController.getAll();
                 System.out.println("enter y pour accéde a la menu precedent");
@@ -66,23 +65,20 @@ public class ServiceUser {
                 choixUser();
                 break ;
             }
-
-
             default:{
                 throw new IllegalArgumentException("Unexpected value: " + n);
             }
-
         }
-
     }
 
-    public void gestionDesCategories() throws SQLException {
-        System.out.println("entrer   1 pour aficher les tache d'un categorie");
-        System.out.println("entrer   2 pour aficher  categories et ses taches");
-        System.out.println("entrer   3 pour retone a menu principal ");
+    public void gestionDesCategories() throws SQLException
+    {
+        System.out.println("entrer   1 pour afficher les tache par id categorie ");
+        System.out.println("entrer   2 pour afficher all categorie");
+        System.out.println("entrer   3 pour retour a menu principal ");
         int n = scanner.nextInt();
-        switch (n) {
-
+        switch (n)
+        {
             case 1: {
                 taskController.trieTaskWithCategory();
                 System.out.println("enter y pour accéde a la menu precedent");
@@ -93,11 +89,10 @@ public class ServiceUser {
                 else {
                     break;
                 }
-
                 break ;
             }
             case 2: {
-                categorieController.trieParAllCategorie();
+                categorieController.getAll();
                 System.out.println("enter y pour accéde a la menu precedent");
                 String b = scanner.next();
                 if (b.equals("y")){
@@ -108,48 +103,39 @@ public class ServiceUser {
                 }
                 break;
             }
-
             case 3: {
                 choixUser();
                 break ;
             }
-
-
             default:{
                 throw new IllegalArgumentException("Unexpected value: " + n);
             }
-
         }
-
     }
 
-    public void choixUser() throws SQLException {
-
+    public void choixUser() throws SQLException
+    {
         System.out.println("entrer   1 pour la gestion des tache");
         System.out.println("entrer   2 pour la gestion des categories");
-        System.out.println("entrer   3 pour areter le programe");
+        System.out.println("entrer   3 pour stop program");
         int n = scanner.nextInt();
-        switch (n) {
+        switch (n)
+        {
             case 1: {
                 gestionaDesTaches();
                 break;
             }
-
             case 2: {
                 gestionDesCategories();
                 break ;
             }
-
             case 3: {
-                System.out.println("sission is end");
+                System.out.println("session is end");
                 break ;
             }
-
-
             default:{
                 throw new IllegalArgumentException("Unexpected value: " + n);
             }
-
         }
     }
 }

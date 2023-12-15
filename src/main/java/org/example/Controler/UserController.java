@@ -36,7 +36,8 @@ public class UserController implements InterfaceController {
     @Override
     public void getAll()
     {
-        User.getUsers().forEach(user -> System.out.println(user.toString()));
+        //User.getUsers().forEach(user -> System.out.println(user.toString()));
+        UserDAO.getAll();
     }
 
     @Override

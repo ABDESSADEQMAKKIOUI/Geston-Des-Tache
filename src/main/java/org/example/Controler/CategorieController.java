@@ -53,17 +53,9 @@ public class CategorieController implements InterfaceController {
     @Override
     public void getAll()
     {
-        Categorie.getCategories().forEach(categorie -> System.out.println(categorie.toString()));
+        CategorieDAO.getAll();
+        //Categorie.getCategories().forEach(categorie -> System.out.println(categorie.toString()));
     }
-
-    public void trieParAllCategorie()
-    {
-        Categorie.getCategories().forEach(categorie -> {
-            System.out.println(categorie.toString() + " contient :");
-            categorie.getTasks().forEach((s, task) -> System.out.println(task.toString()));
-        });
-    }
-
 
     @Override
     public Categorie saisie() throws SQLException

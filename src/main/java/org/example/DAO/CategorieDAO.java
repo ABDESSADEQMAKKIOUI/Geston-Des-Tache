@@ -85,6 +85,7 @@ public class CategorieDAO {
             while (rs.next())
             {
                 Categorie categorie = new Categorie(rs.getInt("id"),rs.getString("libelle"));
+                System.out.println(categorie);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

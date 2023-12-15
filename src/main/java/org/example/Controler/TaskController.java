@@ -49,7 +49,7 @@ public class TaskController implements InterfaceController{
     {
         System.out.println("Entrer code de tache");
         String code = scanner.next();
-        Task task  = TaskDAO.searchDOAByCode(code);
+        Task task  = TaskDAO.searchTaskByCode(code);
         TaskDAO.deleteDOAByCode(code);
         String status = "Supprimer tache";
         HistoryController.addHistory(User.getUserConnect(), task, status , LocalDate.now());
@@ -58,7 +58,8 @@ public class TaskController implements InterfaceController{
     @Override
     public void getAll()
     {
-        Task.getTasks().forEach((s, task) -> System.out.println(task.toString()));
+        TaskDAO.getAll();
+        // Task.getTasks().forEach((s, task) -> System.out.println(task.toString()));
     }
 
     public void trieTaskWithDate()
@@ -113,7 +114,7 @@ public class TaskController implements InterfaceController{
     {
         System.out.println("Entrer code de tache:");
         String code = scanner.next();
-        Task task =TaskDAO.searchDOAByCode(code);
+        Task task =TaskDAO.searchTaskByCode(code);
         System.out.println("entrer l'id de user");
         int id = scanner.nextInt();
         User user = UserDAO.searchDOAById(id);

@@ -48,7 +48,7 @@ public class CsvController {
             {
                 String[] l = line.split(",");
                 String t = l[1];
-                Task task = TaskDAO.searchDOAByCode(t);
+                Task task = TaskDAO.searchTaskByCode(t);
                 assert task != null;
                 Task o = new Task(task.getCode(),task.getLibelle(),task.getPriority(),task.getCategorie(),task.getUser(),task.getDate_creation());
                 Task.getTasks().put(o.getCode(), o);
@@ -59,6 +59,5 @@ public class CsvController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

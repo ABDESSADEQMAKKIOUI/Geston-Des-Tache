@@ -16,10 +16,9 @@ public class UserDAO {
             String insertQuery = "INSERT INTO users (login , password , role) VALUES (?,?,?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setInt(1, user.getId());
-            preparedStatement.setString(2, user.getLogin());
-            preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setString(4, user.getRole());
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getRole());
 
             preparedStatement.executeUpdate();
 
@@ -99,13 +98,13 @@ public class UserDAO {
     {
         try {
             String selectQuery = "SELECT * FROM users";
-
             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next())
             {
                 User user = new User(resultSet.getInt("id"),resultSet.getString("login"),resultSet.getString("password"),resultSet.getString("role"));
+                System.out.println(user);
             }
 
         } catch (SQLException e) {

@@ -19,6 +19,7 @@ public class HistoryController {
 
     public void getAll()
     {
-        History.getHistories().forEach(h -> System.out.println(h.toString()));
+        //History.getHistories().forEach(h -> System.out.println(h.toString()));
+        HistoryDAO.getAll();
     }
 }

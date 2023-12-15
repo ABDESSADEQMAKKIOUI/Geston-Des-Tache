@@ -25,9 +25,9 @@ public class ServiceAdmin {
         System.out.println("entrer   3 pour afficher les taches avec leur emploi du temp ");
         System.out.println("entrer   4 pour modifier  une tache");
         System.out.println("entrer   5 pour supprimer  une tache");
-        System.out.println("entrer   6 pour afficher  les historiques");
+        System.out.println("entrer   6 pour afficher  les historiques des taches réaliser");
         System.out.println("entrer   7 pour aficher  les tache par priority");
-        System.out.println("entrer   8 pour retone a menu principal ");
+        System.out.println("entrer   8 pour retour a menu principal ");
         int n = scanner.nextInt();
         switch (n)
         {
@@ -57,7 +57,7 @@ public class ServiceAdmin {
                 break ;
             }
             case 3: {
-                    taskController.trieTaskWithDate();
+                taskController.trieTaskWithDate();
                 System.out.println("enter y pour accéde a la menu precedent");
                 String b = scanner.next();
                 if (b.equals("y")){
@@ -133,8 +133,9 @@ public class ServiceAdmin {
     {
         System.out.println("entrer   1 pour ajouter un utilisateur");
         System.out.println("entrer   2 pour modifier  un utilisateur");
-        System.out.println("entrer   3 pour suprimer  un utilisateur");
-        System.out.println("entrer   4 pour retone a menu principal ");
+        System.out.println("entrer   3 pour supprimer  un utilisateur");
+        System.out.println("entrer   4 pour affiche all user");
+        System.out.println("entrer   5 pour retour a menu principal ");
         int n = scanner.nextInt();
         switch (n) {
             case 1: {
@@ -146,7 +147,7 @@ public class ServiceAdmin {
                     System.out.println("tu veut ajouter un nouveaux utilisateur y/n");
                     b = scanner.next();
                 }
-                userController.update();
+                gestionDesUtilisateurs();
                 break;
             }
 
@@ -159,7 +160,7 @@ public class ServiceAdmin {
                     System.out.println("tu veut modfier un nouveaux utilisateur y/n");
                     b = scanner.next();
                 }
-                userController.update();
+                gestionDesUtilisateurs();
                 break ;
             }
             case 3: {
@@ -172,27 +173,37 @@ public class ServiceAdmin {
                     b = scanner.next();
                 }
                 gestionDesUtilisateurs();
-
                 break ;
             }
             case 4: {
+                userController.getAll();
+                System.out.println("enter y pour accéde a la menu precedent");
+                String b = scanner.next();
+                if (b.equals("y")){
+                    gestionDesUtilisateurs();
+                }
+                else {
+                    break;
+                }
+                break;
+            }
+            case 5: {
                 choixAdmin();
-
                 break ;
             }
             default:{
                 throw new IllegalArgumentException("Unexpected value: " + n);
             }
+        }
+    }
 
-    }
-    }
     public void gestionDesCategories() throws SQLException {
         System.out.println("entrer   1 pour ajouter un categorie");
         System.out.println("entrer   2 pour modifier  un categorie");
         System.out.println("entrer   3 pour suprimer  un categorie");
-        System.out.println("entrer   4 pour aficher les tache d'un categorie");
-        System.out.println("entrer   5 pour aficher  categories et ses taches");
-        System.out.println("entrer   6 pour retone a menu principal ");
+        System.out.println("entrer   4 pour afficher les tache d'une categorie");
+        System.out.println("entrer   5 pour afficher all catégorie");
+        System.out.println("entrer   6 pour retour a menu principal ");
             int n = scanner.nextInt();
             switch (n) {
                 case 1: {
@@ -230,7 +241,6 @@ public class ServiceAdmin {
                         b = scanner.next();
                     }
                     gestionDesCategories();
-
                     break ;
                 }
                 case 4: {
@@ -243,11 +253,10 @@ public class ServiceAdmin {
                     else {
                         break;
                     }
-
                     break ;
                 }
                 case 5: {
-                    categorieController.trieParAllCategorie();
+                    categorieController.getAll();
                     System.out.println("enter y pour accéde a la menu precedent");
                     String b = scanner.next();
                     if (b.equals("y")){
@@ -258,19 +267,15 @@ public class ServiceAdmin {
                     }
                     break;
                 }
-
                 case 6: {
                     choixAdmin();
                     break ;
                 }
 
-
                 default:{
                     throw new IllegalArgumentException("Unexpected value: " + n);
                 }
-
             }
-
     }
 
     public void choixAdmin() throws SQLException {
@@ -278,14 +283,13 @@ public class ServiceAdmin {
             System.out.println("entrer   1 pour la gestion des tache");
             System.out.println("entrer   2 pour la gestion des utilisateurs");
             System.out.println("entrer   3 pour la gestion des categories");
-            System.out.println("entrer   4 pour areter le programe");
+            System.out.println("entrer   4 pour stop le program");
              int n = scanner.nextInt();
             switch (n) {
                 case 1: {
                      gestionaDesTaches();
                     break;
                 }
-
                 case 2: {
                     gestionDesUtilisateurs();
                     break ;
@@ -294,17 +298,13 @@ public class ServiceAdmin {
                     gestionDesCategories();
                     break ;
                 }
-
                 case 5: {
-                    System.out.println("sission is end");
+                    System.out.println("Session is end");
                     break ;
                 }
-
-
                 default:{
                     throw new IllegalArgumentException("Unexpected value: " + n);
             }
-
         }
     }
 }
