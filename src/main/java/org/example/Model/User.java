@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class User {
-    private  static int id;
+    private int id;
     private String login;
     private String password;
     private String role;
@@ -14,36 +14,21 @@ public class User {
     public User() {
     }
 
-    public User(String login, String password, String role) {
-        id++;
-        this.login = login;
-        this.password = password;
-        this.role = role;
-        users.add(this);
-    }
-    public User(int id,String login, String password, String role) {
-        User.id = id ;
+    public User(int id,String login, String password, String role)
+    {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.role = role;
         users.add(this);
     }
 
-
-    public static ArrayList<User> getUsers() {
-        return users;
-    }
-
-    public static void setUsers(ArrayList<User> users) {
-        User.users = users;
-    }
-
-    public static User getUserConnect() {
-        return userConnect;
-    }
-
-    public static void setUserConnect(User userConnect) {
-        User.userConnect = userConnect;
+    public User(String login, String password, String role)
+    {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+        users.add(this);
     }
 
     public int getId() {
@@ -51,7 +36,7 @@ public class User {
     }
 
     public void setId(int id) {
-        User.id = id;
+        this.id = id;
     }
 
     public String getLogin() {
@@ -78,10 +63,28 @@ public class User {
         this.role = role;
     }
 
+    public static ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public static void setUsers(ArrayList<User> users) {
+        User.users = users;
+    }
+
+    public static User getUserConnect() {
+        return userConnect;
+    }
+
+    public static void setUserConnect(User userConnect) {
+        User.userConnect = userConnect;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "login='" + login + '\'' +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password.hashCode() + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }

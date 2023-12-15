@@ -40,7 +40,7 @@ public class HistoryDAO {
             {
                 User user = UserDAO.searchDOAById(resultSet.getInt("id_user"));
                 Task task = TaskDAO.searchDOAByCode(resultSet.getString("code_tache"));
-                history = new History(user, task, resultSet.getString("libelle"), resultSet.getDate("date_creation").toLocalDate());
+                history = new History(resultSet.getInt("id"),user, task, resultSet.getString("libelle"), resultSet.getDate("date_creation").toLocalDate());
             }
 
         } catch (SQLException e) {

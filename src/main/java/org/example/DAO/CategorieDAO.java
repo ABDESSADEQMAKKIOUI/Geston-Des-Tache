@@ -2,6 +2,8 @@ package org.example.DAO;
 
 import org.example.Model.Categorie;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategorieDAO {
     static Connection connection = DatabaseConnection.getConnection();
@@ -80,10 +82,9 @@ public class CategorieDAO {
             PreparedStatement ps = connection.prepareStatement(getAllQuery);
             ResultSet rs = ps.executeQuery();
 
-            System.out.println("All catégorie in Database:");
             while (rs.next())
             {
-                Categorie categorie = new Categorie(rs.getString("libelle"));
+                Categorie categorie = new Categorie(rs.getInt("id"),rs.getString("libelle"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -97,7 +98,13 @@ public class CategorieDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(searchQuery);
             preparedStatement.setString(1, libelle);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return new Categorie(resultSet.getString("libelle"));
+            Categorie categorie = null;
+            if(resultSet.next())
+            {
+                categorie = new Categorie(resultSet.getInt("id"),resultSet.getString("libelle"));
+            }
+
+            return categorie;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -113,8 +120,9 @@ public class CategorieDAO {
             Categorie categorie = null;
             if(resultSet.next())
             {
-                categorie = new Categorie(resultSet.getString("libelle"));
+                categorie = new Categorie(resultSet.getInt("id"),resultSet.getString("libelle"));
             }
+
             return categorie;
         } catch (SQLException e) {
             throw new RuntimeException(e);

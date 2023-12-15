@@ -29,6 +29,7 @@ public class TaskDAO {
             ps.setDate(6, Date.valueOf(task.getDate_creation()));
             ps.executeUpdate();
 
+            System.out.println("Task has been inserted successfully");
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -100,13 +101,13 @@ public class TaskDAO {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
-            System.out.println("All tasks in DataBase :");
             Task task = null;
             while (rs.next())
             {
                 Categorie categorie = CategorieDAO.searchDAOById(rs.getInt("id_categorie"));
                 User user = UserDAO.searchDOAById(rs.getInt("id_user"));
                 task = new Task(
+                        rs.getInt("id"),
                         rs.getString("code"),
                         rs.getString("nom"),
                         Priority.valueOf(rs.getString("priority").toUpperCase()),
@@ -137,6 +138,7 @@ public class TaskDAO {
                 Categorie categorie = CategorieDAO.searchDAOById(resultSet.getInt("id_categorie"));
                 User user = UserDAO.searchDOAById(resultSet.getInt("id_user"));
                 task = new Task(
+                        resultSet.getInt("id"),
                         resultSet.getString("code"),
                         resultSet.getString("nom"),
                         Priority.valueOf(Priority.class, resultSet.getString("priority").toUpperCase()),
@@ -172,6 +174,7 @@ public class TaskDAO {
                 Categorie categorie = CategorieDAO.searchDAOById(resultSet.getInt("id_categorie"));
                 User user = UserDAO.searchDOAById(resultSet.getInt("id_user"));
                 Task task = new Task(
+                        resultSet.getInt("id"),
                         resultSet.getString("code"),
                         resultSet.getString("nom"),
                         Priority.valueOf(resultSet.getString("priority").toUpperCase()),
@@ -190,7 +193,44 @@ public class TaskDAO {
         return null;
     }
 
-    public static void updateDBOByCode(int id , String  code)
+    public static List<Task> searchDBOByIdCategorie(int id)
+    {
+        try {
+            String selectQuery = "SELECT * FROM taches WHERE id_categorie = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            System.out.println("Task with Categorie id '" + id + "':");
+
+            List<Task> tasks = new ArrayList<>();
+            while (resultSet.next())
+            {
+                Categorie categorie = CategorieDAO.searchDAOById(resultSet.getInt("id_categorie"));
+                User user = UserDAO.searchDOAById(resultSet.getInt("id_user"));
+                Task task = new Task(
+                        resultSet.getInt("id"),
+                        resultSet.getString("code"),
+                        resultSet.getString("nom"),
+                        Priority.valueOf(resultSet.getString("priority").toUpperCase()),
+                        categorie,
+                        user,
+                        resultSet.getDate("date_creation").toLocalDate()
+                );
+                tasks.add(task);
+            }
+
+            return tasks;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error searching for task in the database.");
+        }
+        return null;
+    }
+
+
+    public static void affecterTaskByCode(int id , String  code)
     {
         try{
             if(taskExist(code))
@@ -204,7 +244,7 @@ public class TaskDAO {
                 ps.setString(2, code);
                 ps.executeUpdate();
 
-                System.out.println("Task with code: '"+ code +"' updated successfully");
+                System.out.println("Task avec code: '"+ code +"' affecter à user id '" + id + "' avec success");
             }else{
                 System.out.println("Task with code: '"+ code + "' not found");
             }
@@ -212,6 +252,7 @@ public class TaskDAO {
             throw new RuntimeException(e);
         }
     }
+
     public static List<Task> searchDOAByPriority(String priority)
     {
         try {
@@ -229,6 +270,7 @@ public class TaskDAO {
                 Categorie categorie = CategorieDAO.searchDAOById(resultSet.getInt("id_categorie"));
                 User user = UserDAO.searchDOAById(resultSet.getInt("id_user"));
                 Task task = new Task(
+                        resultSet.getInt("id"),
                         resultSet.getString("code"),
                         resultSet.getString("nom"),
                         Priority.valueOf(resultSet.getString("priority").toUpperCase()),

@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Categorie {
-    private static int id ;
+    private int id ;
     private String libelle ;
     private HashMap<String ,Task> tasks = new HashMap<String ,Task>();
     private static ArrayList<Categorie> categories = new ArrayList<>();
 
 
+    public Categorie(int id,String libelle)
+    {
+        this.id = id;
+        this.libelle = libelle;
+        categories.add(this);
+    }
+
     public Categorie(String libelle)
     {
-        id++;
         this.libelle = libelle;
         categories.add(this);
     }
@@ -38,7 +44,7 @@ public class Categorie {
     }
 
     public void setId(int id) {
-        Categorie.id = id;
+        this.id = id;
     }
 
     public String getLibelle() {
@@ -47,5 +53,13 @@ public class Categorie {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    @Override
+    public String toString() {
+        return "Categorie{" +
+                "id=" + id +
+                ", libelle='" + libelle + '\'' +
+                '}';
     }
 }
