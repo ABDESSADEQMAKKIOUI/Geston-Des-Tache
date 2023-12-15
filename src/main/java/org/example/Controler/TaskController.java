@@ -1,5 +1,6 @@
 package org.example.Controler;
 
+import org.example.DAO.CategorieDAO;
 import org.example.DAO.TaskDAO;
 import org.example.DAO.UserDAO;
 import org.example.Model.Categorie;
@@ -69,20 +70,31 @@ public class TaskController implements InterfaceController{
 
         task.forEach(task1 -> System.out.println(task1.toString()));
     }
+
+    public void trieTaskWithCategory()
+    {
+        System.out.println("Cherchez tache par id category :");
+        int idCategorie = scanner.nextInt();
+        List<Task> tasks = TaskDAO.searchDBOByIdCategorie(idCategorie);
+        assert tasks != null;
+        tasks.forEach(t -> System.out.println(t.toString()));
+    }
+
     public void trieTaskWithPriority()
     {
         System.out.println("Entrer tache priority 1 - LOW / 2 - MEDIUM / 3 - HIGH:");
         String priorityChoice = scanner.next().toUpperCase();
         List<Task> task = TaskDAO.searchDOAByPriority(priorityChoice);
         assert task != null;
-        task.forEach(task1 -> System.out.println(task1.toString()));
+        task.forEach(t -> System.out.println(t.toString()));
     }
 
     @Override
-    public Task saisie() throws SQLException {
+    public Task saisie() throws SQLException
+    {
         System.out.println("Entrer code de tache:");
         String code = scanner.next();
-        if (User.getUserConnect() != null && TaskDAO.taskExist(code))
+        if (User.getUserConnect() != null)
         {
             System.out.println("Entrer libelle de tache:");
             String libelle = scanner.next();
@@ -91,7 +103,7 @@ public class TaskController implements InterfaceController{
             Priority priority = Priority.valueOf(Priority.class, priorityChoice) ;
             System.out.println("Entrer tache libelle categorie:");
             String libelleCategorie = scanner.next();
-            Categorie categorie = new Categorie(libelleCategorie);
+            Categorie categorie = CategorieDAO.searchDAOByLibelle(libelleCategorie);
             return new Task(code, libelle,priority , categorie, User.getUserConnect(), LocalDate.now());
         }
         return null;
@@ -107,7 +119,8 @@ public class TaskController implements InterfaceController{
         User user = UserDAO.searchDOAById(id);
         if (task != null) {
             task.setUser(user);
-            TaskDAO.updateDBOByCode(user.getId(), task.getCode());
+            assert user != null;
+            TaskDAO.affecterTaskByCode(user.getId(), task.getCode());
         }
     }
 }

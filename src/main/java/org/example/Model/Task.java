@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Task {
-    private static int id ;
+    private int id ;
     private String code ;
     private String libelle ;
     private Priority priority ;
@@ -14,6 +14,18 @@ public class Task {
     private LocalDate date_creation ;
 
     private static HashMap<String,Task> tasks = new HashMap<>();
+
+    public Task(int id,String code, String libelle, Priority priority, Categorie categorie, User user, LocalDate date_creation)
+    {
+        this.id = id;
+        this.code = code;
+        this.libelle = libelle;
+        this.priority = priority;
+        this.categorie = categorie;
+        this.user = user;
+        this.date_creation = date_creation;
+        tasks.put(this.code,this);
+    }
 
     public Task(String code, String libelle, Priority priority, Categorie categorie, User user, LocalDate date_creation)
     {
@@ -34,8 +46,8 @@ public class Task {
         return id;
     }
 
-    public static void setId(int id) {
-        Task.id = id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCode() {
@@ -97,9 +109,11 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "code='" + code + '\'' +
+                "id=" + id +
+                ", code='" + code + '\'' +
                 ", libelle='" + libelle + '\'' +
                 ", priority=" + priority +
+                ", categorie=" + categorie +
                 ", user=" + user +
                 ", date_creation=" + date_creation +
                 '}';

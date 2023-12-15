@@ -13,12 +13,13 @@ public class UserDAO {
     public static void addDBO(User user)
     {
         try {
-            String insertQuery = "INSERT INTO users (login , password , role) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO users (login , password , role) VALUES (?,?,?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getRole());
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4, user.getRole());
 
             preparedStatement.executeUpdate();
 
@@ -151,7 +152,7 @@ public class UserDAO {
             User user = null;
             if (resultSet.next())
             {
-                user = new User(resultSet.getString("login"),resultSet.getString("password"),"admin");
+                user = new User(resultSet.getInt("id"),resultSet.getString("login"),resultSet.getString("password"),"admin");
                 System.out.println("Votre avez login");
             }else{
                 System.out.println("Wrong login or password !");

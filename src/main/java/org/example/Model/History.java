@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class History {
-    private static int id;
+    private int id;
     private User user;
     private Task task;
     private String libelle;
@@ -16,14 +16,22 @@ public class History {
     public History() {
     }
 
-    public History(User user, Task task, String libelle, LocalDate date_creation) {
-        id++;
+    public History(int id,User user, Task task, String libelle, LocalDate date_creation) {
+        this.id = id;
         this.user = user;
         this.task = task;
         this.libelle = libelle;
         this.date_creation = date_creation;
         histories.add(this);
+    }
 
+    public History(User user, Task task, String libelle, LocalDate date_creation)
+    {
+        this.user = user;
+        this.task = task;
+        this.libelle = libelle;
+        this.date_creation = date_creation;
+        histories.add(this);
     }
 
     public int getId() {
@@ -31,7 +39,7 @@ public class History {
     }
 
     public void setId(int id) {
-        History.id = id;
+        this.id = id;
     }
 
     public User getUser() {
@@ -76,7 +84,8 @@ public class History {
     @Override
     public String toString() {
         return "History{" +
-                "user=" + user +
+                "id=" + id +
+                ", user=" + user +
                 ", task=" + task +
                 ", libelle='" + libelle + '\'' +
                 ", date_creation=" + date_creation +
