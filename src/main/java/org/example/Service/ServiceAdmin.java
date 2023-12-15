@@ -1,6 +1,7 @@
 package org.example.Service;
 
 import org.example.Controler.CategorieController;
+import org.example.Controler.HistoryController;
 import org.example.Controler.TaskController;
 import org.example.Controler.UserController;
 
@@ -13,6 +14,7 @@ public class ServiceAdmin {
 
     Scanner scanner = new Scanner(System.in);
     TaskController taskController = new TaskController();
+    HistoryController historyController = new HistoryController();
     UserController userController =new UserController();
     CategorieController categorieController = new CategorieController();
 
@@ -24,7 +26,8 @@ public class ServiceAdmin {
         System.out.println("entrer   4 pour modifier  une tache");
         System.out.println("entrer   5 pour supprimer  une tache");
         System.out.println("entrer   6 pour afficher  les historiques");
-        System.out.println("entrer   7 pour retone a menu principal ");
+        System.out.println("entrer   7 pour aficher  les tache par priority");
+        System.out.println("entrer   8 pour retone a menu principal ");
         int n = scanner.nextInt();
         switch (n)
         {
@@ -92,6 +95,7 @@ public class ServiceAdmin {
                 break ;
             }
             case 6: {
+                historyController.getAll();
                 System.out.println("tu veux accéde à la menu précèdent y/n");
                 String b = scanner.next();
                 if (b.equals("y")){
@@ -103,6 +107,19 @@ public class ServiceAdmin {
                 break ;
             }
             case 7: {
+                taskController.trieTaskWithPriority();
+                System.out.println("enter y pour accéde a la menu precedent");
+                String b = scanner.next();
+                if (b.equals("y")){
+                    gestionaDesTaches();
+                }
+                else {
+                    break;
+                }
+
+                break ;
+            }
+            case 8: {
                 choixAdmin();
                 break ;
             }
@@ -217,7 +234,7 @@ public class ServiceAdmin {
                     break ;
                 }
                 case 4: {
-                    categorieController.trieParCategorie();
+                    taskController.trieTaskWithCategory();
                     System.out.println("enter y pour accéde a la menu precedent");
                     String b = scanner.next();
                     if (b.equals("y")){
