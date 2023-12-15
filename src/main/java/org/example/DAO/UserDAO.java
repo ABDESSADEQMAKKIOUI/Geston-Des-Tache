@@ -152,7 +152,7 @@ public class UserDAO {
             User user = null;
             if (resultSet.next())
             {
-                user = new User(resultSet.getInt("id"),resultSet.getString("login"),resultSet.getString("password"),"admin");
+                user = new User(resultSet.getInt("id"),resultSet.getString("login"),resultSet.getString("password"),resultSet.getString("roleggg"));
                 System.out.println("Votre avez login");
             }else{
                 System.out.println("Wrong login or password !");
