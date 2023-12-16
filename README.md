@@ -66,3 +66,5 @@ Exécuter le fichier "db-task-manager.sql" pour initialiser la structure de la b
 2 - Configuration de l'Environnement
 
 Installer JDK 1.8 ou une version ultérieure.
+![useCaseDiagram drawio](https://github.com/ABDESSADEQMAKKIOUI/Geston-Des-Tache/assets/95092583/b7151ebd-bd12-4890-9a8e-7700656c9fa6)
+![diagrammeClass drawio](https://github.com/ABDESSADEQMAKKIOUI/Geston-Des-Tache/assets/95092583/ff35c4e9-afc1-4bc6-8d4a-7742ede3a95f)
